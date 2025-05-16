@@ -1,0 +1,2094 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Java Cheat sheet - דף לבגרות במדעי המחשב ב Java</title>
+    <style>
+        /* cspell:disable-file */
+        /* webkit printing magic: print all background colors */
+        html {
+            -webkit-print-color-adjust: exact;
+        }
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        @media only screen {
+            body {
+                margin: 2em auto;
+                max-width: 900px;
+                color: rgb(55, 53, 47);
+            }
+        }
+
+        body {
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        a,
+        a.visited {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        .pdf-relative-link-path {
+            font-size: 80%;
+            color: #444;
+        }
+
+        h1,
+        h2,
+        h3 {
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 0.75em;
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            margin-top: 1.875rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 1.25rem;
+        }
+
+        .source {
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 1.5em;
+            word-break: break-all;
+        }
+
+        .callout {
+            border-radius: 3px;
+            padding: 1rem;
+        }
+
+        figure {
+            margin: 1.25em 0;
+            page-break-inside: avoid;
+        }
+
+        figcaption {
+            opacity: 0.5;
+            font-size: 85%;
+            margin-top: 0.5em;
+        }
+
+        mark {
+            background-color: transparent;
+        }
+
+        .indented {
+            padding-left: 1.5em;
+        }
+
+        hr {
+            background: transparent;
+            display: block;
+            width: 100%;
+            height: 1px;
+            visibility: visible;
+            border: none;
+            border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        @media only print {
+            img {
+                max-height: 100vh;
+                object-fit: contain;
+            }
+        }
+
+        @page {
+            margin: 1in;
+        }
+
+        .collection-content {
+            font-size: 0.875rem;
+        }
+
+        .column-list {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .column {
+            padding: 0 1em;
+        }
+
+        .column:first-child {
+            padding-left: 0;
+        }
+
+        .column:last-child {
+            padding-right: 0;
+        }
+
+        .table_of_contents-item {
+            display: block;
+            font-size: 0.875rem;
+            line-height: 1.3;
+            padding: 0.125rem;
+        }
+
+        .table_of_contents-indent-1 {
+            margin-left: 1.5rem;
+        }
+
+        .table_of_contents-indent-2 {
+            margin-left: 3rem;
+        }
+
+        .table_of_contents-indent-3 {
+            margin-left: 4.5rem;
+        }
+
+        .table_of_contents-link {
+            text-decoration: none;
+            opacity: 0.7;
+            border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid rgba(55, 53, 47, 0.09);
+            border-collapse: collapse;
+        }
+
+        table {
+            border-left: none;
+            border-right: none;
+        }
+
+        th,
+        td {
+            font-weight: normal;
+            padding: 0.25em 0.5em;
+            line-height: 1.5;
+            min-height: 1.5em;
+            text-align: left;
+        }
+
+        th {
+            color: rgba(55, 53, 47, 0.6);
+        }
+
+        ol,
+        ul {
+            margin: 0;
+            margin-block-start: 0.6em;
+            margin-block-end: 0.6em;
+        }
+
+        li > ol:first-child,
+        li > ul:first-child {
+            margin-block-start: 0.6em;
+        }
+
+        ul > li {
+            list-style: disc;
+        }
+
+        ul.to-do-list {
+            padding-inline-start: 0;
+        }
+
+        ul.to-do-list > li {
+            list-style: none;
+        }
+
+        .to-do-children-checked {
+            text-decoration: line-through;
+            opacity: 0.375;
+        }
+
+        ul.toggle > li {
+            list-style: none;
+        }
+
+        ul {
+            padding-inline-start: 1.7em;
+        }
+
+        ul > li {
+            padding-left: 0.1em;
+        }
+
+        ol {
+            padding-inline-start: 1.6em;
+        }
+
+        ol > li {
+            padding-left: 0.2em;
+        }
+
+        .mono ol {
+            padding-inline-start: 2em;
+        }
+
+        .mono ol > li {
+            text-indent: -0.4em;
+        }
+
+        .toggle {
+            padding-inline-start: 0em;
+            list-style-type: none;
+        }
+
+        /* Indent toggle children */
+        .toggle > li > details {
+            padding-left: 1.7em;
+        }
+
+        .toggle > li > details > summary {
+            margin-left: -1.1em;
+        }
+
+        .selected-value {
+            display: inline-block;
+            padding: 0 0.5em;
+            background: rgba(206, 205, 202, 0.5);
+            border-radius: 3px;
+            margin-right: 0.5em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            white-space: nowrap;
+        }
+
+        .collection-title {
+            display: inline-block;
+            margin-right: 1em;
+        }
+
+        .page-description {
+            margin-bottom: 2em;
+        }
+
+        .simple-table {
+            margin-top: 1em;
+            font-size: 0.875rem;
+            empty-cells: show;
+        }
+        .simple-table td {
+            height: 29px;
+            min-width: 120px;
+        }
+
+        .simple-table th {
+            height: 29px;
+            min-width: 120px;
+        }
+
+        .simple-table-header-color {
+            background: rgb(247, 246, 243);
+            color: black;
+        }
+        .simple-table-header {
+            font-weight: 500;
+        }
+
+        time {
+            opacity: 0.5;
+        }
+
+        .icon {
+            display: inline-block;
+            max-width: 1.2em;
+            max-height: 1.2em;
+            text-decoration: none;
+            vertical-align: text-bottom;
+            margin-right: 0.5em;
+        }
+
+        img.icon {
+            border-radius: 3px;
+        }
+
+        .user-icon {
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 100%;
+            margin-right: 0.5rem;
+        }
+
+        .user-icon-inner {
+            font-size: 0.8em;
+        }
+
+        .text-icon {
+            border: 1px solid #000;
+            text-align: center;
+        }
+
+        .page-cover-image {
+            display: block;
+            object-fit: cover;
+            width: 100%;
+            max-height: 30vh;
+        }
+
+        .page-header-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header-icon-with-cover {
+            margin-top: -0.72em;
+            margin-left: 0.07em;
+        }
+
+        .page-header-icon img {
+            border-radius: 3px;
+        }
+
+        .link-to-page {
+            margin: 1em 0;
+            padding: 0;
+            border: none;
+            font-weight: 500;
+        }
+
+        p > .user {
+            opacity: 0.5;
+        }
+
+        td > .user,
+        td > time {
+            white-space: nowrap;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
+            margin-right: 0.6em;
+            vertical-align: middle;
+        }
+
+        p {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .image {
+            border: none;
+            margin: 1.5em 0;
+            padding: 0;
+            border-radius: 0;
+            text-align: center;
+        }
+
+        .code,
+        code {
+            background: rgba(135, 131, 120, 0.15);
+            border-radius: 3px;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 85%;
+            tab-size: 2;
+        }
+
+        code {
+            color: #eb5757;
+        }
+
+        .code {
+            padding: 1.5em 1em;
+        }
+
+        .code-wrap {
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .code > code {
+            background: none;
+            padding: 0;
+            font-size: 100%;
+            color: inherit;
+        }
+
+        blockquote {
+            font-size: 1.25em;
+            margin: 1em 0;
+            padding-left: 1em;
+            border-left: 3px solid rgb(55, 53, 47);
+        }
+
+        .bookmark {
+            text-decoration: none;
+            max-height: 8em;
+            padding: 0;
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        .bookmark-title {
+            font-size: 0.85em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 1.75em;
+            white-space: nowrap;
+        }
+
+        .bookmark-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bookmark-info {
+            flex: 4 1 180px;
+            padding: 12px 14px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bookmark-image {
+            width: 33%;
+            flex: 1 1 180px;
+            display: block;
+            position: relative;
+            object-fit: cover;
+            border-radius: 1px;
+        }
+
+        .bookmark-description {
+            color: rgba(55, 53, 47, 0.6);
+            font-size: 0.75em;
+            overflow: hidden;
+            max-height: 4.5em;
+            word-break: break-word;
+        }
+
+        .bookmark-href {
+            font-size: 0.75em;
+            margin-top: 0.25em;
+        }
+
+        .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+        .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+        .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+        .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+        .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+        .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+        .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+        .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+        .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+        .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+        .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+        .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+        .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+        .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+        .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+        .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+        .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+        .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+        .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+        .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+        .highlight-default {
+            color: rgba(50, 48, 44, 1);
+        }
+        .highlight-gray {
+            color: rgba(115, 114, 110, 1);
+            fill: rgba(115, 114, 110, 1);
+        }
+        .highlight-brown {
+            color: rgba(159, 107, 83, 1);
+            fill: rgba(159, 107, 83, 1);
+        }
+        .highlight-orange {
+            color: rgba(217, 115, 13, 1);
+            fill: rgba(217, 115, 13, 1);
+        }
+        .highlight-yellow {
+            color: rgba(203, 145, 47, 1);
+            fill: rgba(203, 145, 47, 1);
+        }
+        .highlight-teal {
+            color: rgba(68, 131, 97, 1);
+            fill: rgba(68, 131, 97, 1);
+        }
+        .highlight-blue {
+            color: rgba(51, 126, 169, 1);
+            fill: rgba(51, 126, 169, 1);
+        }
+        .highlight-purple {
+            color: rgba(144, 101, 176, 1);
+            fill: rgba(144, 101, 176, 1);
+        }
+        .highlight-pink {
+            color: rgba(193, 76, 138, 1);
+            fill: rgba(193, 76, 138, 1);
+        }
+        .highlight-red {
+            color: rgba(205, 60, 58, 1);
+            fill: rgba(205, 60, 58, 1);
+        }
+        .highlight-default_background {
+            color: rgba(50, 48, 44, 1);
+        }
+        .highlight-gray_background {
+            background: rgba(248, 248, 247, 1);
+        }
+        .highlight-brown_background {
+            background: rgba(244, 238, 238, 1);
+        }
+        .highlight-orange_background {
+            background: rgba(251, 236, 221, 1);
+        }
+        .highlight-yellow_background {
+            background: rgba(251, 243, 219, 1);
+        }
+        .highlight-teal_background {
+            background: rgba(237, 243, 236, 1);
+        }
+        .highlight-blue_background {
+            background: rgba(231, 243, 248, 1);
+        }
+        .highlight-purple_background {
+            background: rgba(248, 243, 252, 1);
+        }
+        .highlight-pink_background {
+            background: rgba(252, 241, 246, 1);
+        }
+        .highlight-red_background {
+            background: rgba(253, 235, 236, 1);
+        }
+        .block-color-default {
+            color: inherit;
+            fill: inherit;
+        }
+        .block-color-gray {
+            color: rgba(115, 114, 110, 1);
+            fill: rgba(115, 114, 110, 1);
+        }
+        .block-color-brown {
+            color: rgba(159, 107, 83, 1);
+            fill: rgba(159, 107, 83, 1);
+        }
+        .block-color-orange {
+            color: rgba(217, 115, 13, 1);
+            fill: rgba(217, 115, 13, 1);
+        }
+        .block-color-yellow {
+            color: rgba(203, 145, 47, 1);
+            fill: rgba(203, 145, 47, 1);
+        }
+        .block-color-teal {
+            color: rgba(68, 131, 97, 1);
+            fill: rgba(68, 131, 97, 1);
+        }
+        .block-color-blue {
+            color: rgba(51, 126, 169, 1);
+            fill: rgba(51, 126, 169, 1);
+        }
+        .block-color-purple {
+            color: rgba(144, 101, 176, 1);
+            fill: rgba(144, 101, 176, 1);
+        }
+        .block-color-pink {
+            color: rgba(193, 76, 138, 1);
+            fill: rgba(193, 76, 138, 1);
+        }
+        .block-color-red {
+            color: rgba(205, 60, 58, 1);
+            fill: rgba(205, 60, 58, 1);
+        }
+        .block-color-default_background {
+            color: inherit;
+            fill: inherit;
+        }
+        .block-color-gray_background {
+            background: rgba(248, 248, 247, 1);
+        }
+        .block-color-brown_background {
+            background: rgba(244, 238, 238, 1);
+        }
+        .block-color-orange_background {
+            background: rgba(251, 236, 221, 1);
+        }
+        .block-color-yellow_background {
+            background: rgba(251, 243, 219, 1);
+        }
+        .block-color-teal_background {
+            background: rgba(237, 243, 236, 1);
+        }
+        .block-color-blue_background {
+            background: rgba(231, 243, 248, 1);
+        }
+        .block-color-purple_background {
+            background: rgba(248, 243, 252, 1);
+        }
+        .block-color-pink_background {
+            background: rgba(252, 241, 246, 1);
+        }
+        .block-color-red_background {
+            background: rgba(253, 235, 236, 1);
+        }
+        .select-value-color-uiBlue { background-color: undefined; }
+        .select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+        .select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+        .select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+        .select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+        .select-value-color-translucentGray { background-color: undefined; }
+        .select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+        .select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+        .select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+        .select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+        .select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+        .select-value-color-pageGlass { background-color: undefined; }
+        .select-value-color-washGlass { background-color: undefined; }
+
+        .checkbox {
+            display: inline-flex;
+            vertical-align: text-bottom;
+            width: 16;
+            height: 16;
+            background-size: 16px;
+            margin-left: 2px;
+            margin-right: 5px;
+        }
+
+        .checkbox-on {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+        }
+
+        .checkbox-off {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Clear separation before ad -->
+    <p style="margin-bottom: 20px;"></p>
+
+    <!-- Ad container with improved styling -->
+    <div class="ad-container" style="margin: 20px 0; clear: both; display: block;">
+        <script type="text/javascript">
+            atOptions = {
+            		'key' : 'cb2c2779e0995d04471242f41dca28c2',
+            		'format' : 'iframe',
+            		'height' : 90,
+            		'width' : 728,
+            		'params' : {}
+            	};
+        </script>
+
+        <script type="text/javascript" src="//www.highperformanceformat.com/cb2c2779e0995d04471242f41dca28c2/invoke.js"></script>
+    </div>
+
+    <!-- Clear separation after ad -->
+    <p style="margin-top: 20px;"></p>
+
+    <article id="45202223-52dc-4b13-9a12-599afaf0e77d" class="page sans" style="white-space: normal;">
+        <header>
+            <div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/gradebook_blue.svg" />
+            </div>
+            <h1 class="page-title">Java Cheat sheet - דף לבגרות במדעי המחשב ב Java</h1>
+            <p class="page-description"></p>
+        </header>
+        <div class="page-body">
+            <p id="1c26e254-fe2b-814c-805d-d460a01d8f32" class="">
+            </p>
+            <p id="1c26e254-fe2b-81d1-a54f-d34127626649" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-810f-93b5-ea1ba14ab712" class="">Table of Contents</h1>
+            <nav id="1c26e254-fe2b-8131-873f-db8367fd9bef" class="block-color-gray table_of_contents">
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-810f-93b5-ea1ba14ab712">Table
+                of Contents</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8111-9622-d4208025ff2c">מילון</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8162-9663-c1bdd7cf1612">Theory</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81c4-8b6e-cd6dd8418991">Overloading
+                - העמסה</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8141-aed7-d6f61a21992b">Main</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8124-8e33-efdd5345b4c5">Constants</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8176-8efd-ee95cb6f8717">Output
+                - פלט</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-811b-88ab-fcf03060f1dd">Jump
+                Line &amp; Tab</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81eb-b2d1-d2ac434d8f27">Print
+                with plus</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81c8-823c-e1898fdf6856">Print
+                table with System.out.format()</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8183-9fd2-c94600a9bf1b">Input
+                - קלט</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81b6-8c2b-f311f2e72a22">Char
+                Input</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-8172-8950-f09498d621ab">bound</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81d4-b22b-e60cf07861f1">Variable
+                casting</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8136-9a28-ecca11a760e7">Basic
+                Mathematical Functions</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81a8-8520-d76a4efb9855">
+                Division - חילוק</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-817f-94b4-e107211222b5">Power</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-8134-a3d7-c556e6f4fe1f">Square
+                Root</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-814b-98c2-dcc77be14e0b">פירוק
+                מספר לספרותיו - Decomposing a number into its digits</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81d5-8580-dbc48498d5b5">Lots
+                of if</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81e1-91d8-dc32ab440b40">Math.min()
+                / Math.max()</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81b8-8573-c3dabd756ba7">Math.Random() </a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-8170-a938-f25f19d74b83">for
+                a range</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81dd-b560-f763186f16e9">Random
+                class</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8180-b182-f668a19166c8">String</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-816d-b1ef-c877646d54a0">string
+                equals</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81d9-acdb-d643c5d01f5e">String
+                functions</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81f6-a33a-e885390abde1">Use
+                of charAt, length</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81cf-9967-f528fea4b3b5">Array
+                - מערך</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81bd-a18c-ebee490118f4">Array
+                of nodes</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81c3-ba68-d22b5dc75585">Array
+                of objects</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81b1-a4a5-f1ab5f30fb74">Multi
+                dimensional array</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-816e-a38d-e44d5d132aa5">LinkedList</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-8185-9acf-ed39e7ee6f15">Create
+                List</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-812c-b618-db042055b138">Print
+                list - pay attention that it is for INTEGER, change type</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81bc-aaf4-c8291b1b987f">LinkedListUtils</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-818c-8269-f78a2578b78e">Queue</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8143-aa6e-c4ff5ddeade1">Hierarchy</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-815d-849e-c0999a67f748">Every
+                class extends from Object automatically</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-8149-86bd-c83f6d7c908a">Functions
+                in object</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1c26e254-fe2b-8166-b05e-d680dc5a5681">toString()</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1c26e254-fe2b-814c-9d58-f1e6767687a2">equals(Object)</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81d1-bae4-cf9bb051806a">super.&lt;method&gt;()</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8177-bbf7-fcd170ab40d6">דריסה
+                - override</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81fe-a6d1-c87d377cbc04">Greeting
+                Card - Parent Class</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81c4-9e64-c56a4b8b13be">WeedingCard
+                - Child</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81a4-8ace-e910f685e1f2">BirthdayCard
+                - child from Greeting Card</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-81ff-b202-ec0c6575daf9">YouthBirthday
+                - child of BirthdayCard</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81af-abec-ee4bf825d3b9">Super
+                in the constructor</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-8174-b0fb-f4a776105e8e">Static
+                variables in classes</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81b4-a832-c5f9c65007d4">Constants
+                in classes</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c26e254-fe2b-818b-b934-c2d13ef19551">Use
+                the constant</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-810f-a059-c27b4b339ed9">Static
+                methods/functions</a></div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81e2-aca1-c69b5087edb4">OBS</a>
+                </div>
+                <div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c26e254-fe2b-81b3-968c-fcbc21a2a970">לצייר
+                עצמים</a></div>
+            </nav>
+            <p id="1c26e254-fe2b-81ea-b415-f16d9d40d7ba" class="">
+            </p>
+            <p id="1c26e254-fe2b-81e0-ab3c-d04e5bd4e5c4" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-8111-9622-d4208025ff2c" class="">מילון</h1>
+            <p id="1c26e254-fe2b-8155-b7fd-f0fe7ec4e785" class="">ממשי = double</p>
+            <p id="1c26e254-fe2b-811b-b386-f26947dfad03" class="">מספר ראשוני = prime number</p>
+            <h1 id="1c26e254-fe2b-8162-9663-c1bdd7cf1612" class="">Theory</h1>
+            <h2 id="1c26e254-fe2b-81c4-8b6e-cd6dd8418991" class="">Overloading - העמסה</h2>
+            <p id="1c26e254-fe2b-81aa-82d6-ff82c19dbe27" class="">היכולת לבנות פעולות עם אותו שם אך עם כמות פרמטר או טיפוס שונהf
+            </p>
+            <h1 id="1c26e254-fe2b-8141-aed7-d6f61a21992b" class="">Main</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81cb-8221-ea3d80d64d8a" class="code"><code class="language-Java">  int x;  // Create a class attribute
+
+  // Create a class constructor for the Main class
+  public Main() {
+    x = 5;  // Set the initial value for the class attribute x
+  }
+
+  public static void main(String[] args) {
+    Main myObj = new Main(); // Create an object of class Main (This will call the constructor)
+    System.out.println(myObj.x); // Print the value of x
+  }
+}
+
+// Outputs 5</code></pre>
+            <h1 id="1c26e254-fe2b-8124-8e33-efdd5345b4c5" class="">Constants</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81df-b1db-cbcb7294e325" class="code"><code class="language-Java">public static class main{
+
+	// global
+	public static final int MIN_AGE = 18; //Minimum age requirement
+
+	public static void main(String[] args) {
+
+		// local
+		final int MAX_AGE = 40;
+
+ }
+}</code></pre>
+            <h1 id="1c26e254-fe2b-8176-8efd-ee95cb6f8717" class="">Output - פלט</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8189-b672-e19c6039e8ff" class="code"><code class="language-Java">System.out.print(&quot;hello World&quot;);
+
+// with ln jumps a line
+System.out.println(&quot;hello World&quot;);
+
+//jump line \n
+System.out.println(&quot;hello \n World&quot;);
+
+// tab space \t
+System.out.println(&quot;hello \t World&quot;);</code></pre>
+            <p id="1c26e254-fe2b-81d6-8d56-f7d102e07a03" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-811b-88ab-fcf03060f1dd" class="">Jump Line &amp; Tab</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8150-8531-dfef38e94fbc" class="code"><code class="language-Java">//jump line \n
+System.out.println(&quot;hello \n World&quot;);
+
+// tab space \t
+System.out.println(&quot;hello \t World&quot;);</code></pre>
+            <p id="1c26e254-fe2b-8172-be86-d2afad268fea" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81eb-b2d1-d2ac434d8f27" class="">Print with plus</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81ff-8e75-c4ba89ca6b86" class="code"><code class="language-Java"
+                                                                          style="white-space:pre-wrap;word-break:break-all">System.out.println(9+9);
+//only number it sums
+//18
+
+System.out.println(&quot;&quot;+9+9);
+//string before it treats it as a string
+//99
+System.out.println(&quot;1+3&quot;+9+9);
+//1+399
+
+System.out.println(9+9+&quot;1+3&quot;);
+//sum before keeps it sum, bu after is string
+//181+3
+
+// If the sum comes first, it prints the result of the sum
+// If the sum comes after, it adds to the string as a string
+</code></pre>
+            <h2 id="1c26e254-fe2b-81c8-823c-e1898fdf6856" class="">Print table with System.out.format()</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-817c-95b7-fc0d98858e5f" class="code"><code class="language-Java"
+                                                                          style="white-space:pre-wrap;word-break:break-all">// create a 2d arr of each row
+final Object[][] table = new String[4][];
+table[0] = new String[] { &quot;First Name:&quot;,&quot;|&quot; ,&quot;Second Name:&quot;,&quot;|&quot; , &quot;No Brothers:&quot;,&quot;|&quot; ,&quot;Age:&quot;};
+table[1] = new String[] { &quot;Gil&quot;,&quot;|&quot; ,&quot;Paz&quot;,&quot;|&quot; ,&quot;3&quot;,&quot;|&quot; ,&quot;11.5&quot; };
+table[2] = new String[] { &quot;Dan&quot;,&quot;|&quot; , &quot;Daniel&quot;,&quot;|&quot; , &quot;3&quot;,&quot;|&quot; ,&quot;20.3&quot; };
+table[3] = new String[] { &quot;Yael&quot;,&quot;|&quot; , &quot;Lev&quot;,&quot;|&quot; , &quot;5&quot;,&quot;|&quot; , &quot;17.0&quot; };
+
+// for each row print it with the same space
+// add %-15s to add an index of the arr to print
+// end with /n
+for (final Object[] row : table) {
+    System.out.format(&quot;%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n&quot;, row);
+}</code></pre>
+            <p id="1c26e254-fe2b-815a-a42d-fd0c864f336e" class="">
+            </p>
+            <p id="1c26e254-fe2b-8158-aa86-e3b107d3c01e" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-8183-9fd2-c94600a9bf1b" class="">Input - קלט</h1>
+            <figure id="1c26e254-fe2b-81d0-b5a3-f715ace12971" class="image">
+                <a href="/Untitled.png"><img style="width:709.9874877929688px" src="images/Untitled.png"
+                    /></a>
+            </figure>
+            <p id="1c26e254-fe2b-8123-bf23-c05fbcd4a963" class="">
+            </p>
+            <p id="1c26e254-fe2b-8182-a64f-e760e05576b7" class="">Include:</p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81da-b8e7-f35ff0800741" class="code"><code class="language-Java">import java.util.Scanner;</code></pre>
+            <p id="1c26e254-fe2b-817c-89fc-c80d9685ce38" class="">
+            </p>
+            <p id="1c26e254-fe2b-810d-8746-e70323513766" class="">Code:</p>
+            <p id="1c26e254-fe2b-81ef-be6a-c8bb6ea7d920" class="">
+            </p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8187-a25e-c2e93659e659" class="code"><code class="language-Java">				Scanner scanner = new Scanner(System.in);
+        System.out.println(&quot;Enter student id: &quot;);
+        currentId = scanner.nextInt();
+        System.out.println(&quot;Enter student name: &quot;);
+
+        scanner.nextLine(); // take input of the end line
+
+        currentStudentName = scanner.nextLine();
+        System.out.println(&quot;Id: &quot; + currentId+ &quot; student name: &quot;+ currentStudentName);</code></pre>
+            <h1 id="1c26e254-fe2b-81b6-8c2b-f311f2e72a22" class="">Char Input</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-816e-930c-c73f321c2688" class="code"><code class="language-C">char ch = scanner.next().charAt(0);
+// input ge
+// char = e</code></pre>
+            <h2 id="1c26e254-fe2b-8172-8950-f09498d621ab" class="">bound</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81a0-959f-ef4164d8ed07" class="code"><code class="language-Java">// take input from the user assign it to an int
+// 10 is the highest bound
+		int num1 = input.nextInt(10);</code></pre>
+            <h1 id="1c26e254-fe2b-81d4-b22b-e60cf07861f1" class="">Variable casting</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81d6-b7ab-fe9aaa2bfb5a" class="code"><code class="language-Java">double pi = 3.14;
+
+// casting by adding the type of variable on ()
+int short = (int) pi;</code></pre>
+            <p id="1c26e254-fe2b-8108-81e2-cb669c1c4c0c" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-8136-9a28-ecca11a760e7" class="">Basic Mathematical Functions</h1>
+            <h2 id="1c26e254-fe2b-81a8-8520-d76a4efb9855" class=""> Division - חילוק</h2>
+            <p id="1c26e254-fe2b-81de-98b5-e01a18b374a8" class="">If it is a division between int its needed to cast to a double to get the whole number</p>
+            <p id="1c26e254-fe2b-8130-b384-c321fc5e68b8" class="">
+            </p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8113-a190-d804e13c587e" class="code"><code class="language-Java">int a=10, b=4;
+
+// without casting -&gt; result is 2.0
+double result = a/b;
+
+
+// with casting -&gt; result is 2.5
+double result = (double) a/b;</code></pre>
+            <h2 id="1c26e254-fe2b-817f-94b4-e107211222b5" class="">Power</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81b4-a3a8-c288b3b66059" class="code"><code class="language-JavaScript">Math.pow(stepsN, 2)</code></pre>
+            <h2 id="1c26e254-fe2b-8134-a3d7-c556e6f4fe1f" class="">Square Root</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81e1-895b-dbe284f64382" class="code"><code class="language-Java">Math.sqrt(diagonalSquare)</code></pre>
+            <p id="1c26e254-fe2b-8148-a2a9-c4b20ee3f46e" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-814b-98c2-dcc77be14e0b" class="">פירוק מספר לספרותיו - Decomposing a number into its
+            digits</h2>
+            <p id="1c26e254-fe2b-81c3-96b7-e31388aee700" class="">
+            </p>
+            <figure id="1c26e254-fe2b-8194-9196-e8ebaef6ff1a" class="image">
+                <a href="images/Untitled%201.png"><img style="width:709.9625244140625px" src="images/Untitled%201.png"
+                    /></a>
+            </figure>
+            <p id="1c26e254-fe2b-81fc-b976-efc00e5ade71" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-81d5-8580-dbc48498d5b5" class="">Lots of if</h1>
+            <p id="1c26e254-fe2b-8164-9f3e-d838679b8e7a" class="">if there are a lot of ifs, without elses. The ifs under the if that is true wont be run</p>
+            <p id="1c26e254-fe2b-81b1-8e8e-f4660f40497f" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-81e1-91d8-dc32ab440b40" class="">Math.min() / Math.max()</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81e0-8dac-d6fb035c72af" class="code"><code class="language-SQL">public class Gfg {
+
+    public static void main(String args[])
+    {
+        double a = 12.123;
+        double b = 12.456;
+
+        // prints the minimum of two numbers
+        System.out.println(Math.min(a, b));
+
+        // prinys max of both numbers
+        System.out.println(Math.min(a, b));
+    }
+}</code></pre>
+            <h1 id="1c26e254-fe2b-81b8-8573-c3dabd756ba7" class="">Math.Random() </h1>
+            <p id="1c26e254-fe2b-81f1-9cfe-f4459a952948" class="">returns a random number between 0 and 1 (not inclusive)
+            </p>
+            <p id="1c26e254-fe2b-81c5-a04b-c4833ae572e2" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-8170-a938-f25f19d74b83" class="">for a range</h2>
+            <p id="1c26e254-fe2b-81b0-a22b-e39f9d7a71a9" class="">
+            </p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81f9-b4fb-d8ec282231f6" class="code"><code class="language-C">int max= 6;
+
+int min= 1;
+
+// includes max and min (min till max)
+int result = (int) (Math.random() * (max - min+1) +min);
+
+// excludes max (min till max-1)
+int result = (int) (Math.random() * (max - min) +min);</code></pre>
+            <p id="1c26e254-fe2b-81f7-83b3-f15b7bd1e3cb" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-81dd-b560-f763186f16e9" class="">Random class</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81e7-a4f0-cffb30545f6c" class="code"><code class="language-Java"
+                                                                          style="white-space:pre-wrap;word-break:break-all"> */
+public class RandomNumberExample {
+
+	public static void main(String[] args) {
+
+		//initialize random number generator
+		Random random = new Random();
+
+		//generates boolean value
+		System.out.println(random.nextBoolean());
+
+		//generates double value
+		System.out.println(random.nextDouble());
+
+		//generates float value
+		System.out.println(random.nextFloat());
+
+		//generates int value
+		System.out.println(random.nextInt());
+
+		//generates int value within specific limit
+		System.out.println(random.nextInt(20));
+
+	}
+
+}</code></pre>
+            <p id="1c26e254-fe2b-8158-b718-daa5caf9eeae" class="">
+            </p>
+            <p id="1c26e254-fe2b-81a2-963f-e549c990c41c" class="">
+            </p>
+            <p id="1c26e254-fe2b-8162-93e8-e5a363030806" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-8180-b182-f668a19166c8" class="">String</h1>
+            <h2 id="1c26e254-fe2b-816d-b1ef-c877646d54a0" class="">string equals</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81f2-b07f-ece9c03bfc20" class="code"><code class="language-Java">String myStr1 = &quot;Hello&quot;;
+String myStr2 = &quot;Hello&quot;;
+String myStr3 = &quot;Another String&quot;;
+System.out.println(myStr1.equals(myStr2)); // Returns true because they are equal
+System.out.println(myStr1.equals(myStr3)); // false</code></pre>
+            <h2 id="1c26e254-fe2b-81d9-acdb-d643c5d01f5e" class="">String functions</h2>
+            <table id="1c26e254-fe2b-8106-9b7d-da70a58aa3d9" class="simple-table">
+                <tbody>
+                    <tr id="1c26e254-fe2b-8121-9239-d56b6e55c4ec">
+                        <td id="V`k`" class="" style="width:232.66666666666666px">Function</td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Explanation</td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px">returns</td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-816b-9355-eed4b123d5eb">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>s.charAt(num)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns the character at the specified index (position)
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81b0-9f79-fd3ab97b9fd0">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>s.concat(String s)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Concatenates the specified string to the end of this string.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81e3-913d-cf34e0056266">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>s.contains(CharSequence s)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Tests if this string contains the specified sequence of char values.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>boolean</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-815f-89aa-ca784441dd07">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>s.endsWith(String suffix)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Tests if this string ends with the specified suffix.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>boolean</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81b4-ae76-edefc3f0932e">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>s.indexOf(int ch)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns the index within this string of the first occurrence of the specified character.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81cb-a180-d8cf218ca729">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>indexOf(int ch, int fromIndex)</code>
+                        </td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns the index within this string of the first occurrence of the specified character, starting the search at the specified index.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-8119-8d4d-db334c64d343">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>indexOf(String str)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns the index within this string of the first occurrence of the specified substring.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81cf-9d32-de31d7fa10d3">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>indexOf(String str, int
+                    fromIndex)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81a0-a125-f4614d3c2212">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>isEmpty()</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns true if, and only if, length() is 0.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>boolean</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-814d-8bff-e3a6e58e3df1">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>lastIndexOf(int ch)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns the index within this string of the last occurrence of the specified character.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-818a-ad8c-e589a03a24c2">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>length()</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns the length of this string.</td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>int</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-819d-a29c-dc9f12bbc78b">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>replace(char oldChar, char
+                    newChar)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns a new string resulting from replacing all occurrences of oldChar in this string with newChar.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>string</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81a2-b1a8-dbcf8b48160d">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>substring(int beginIndex)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns a new string that is a substring of this string.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>string</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-8113-8432-e518d1072ab1">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>substring(int beginIndex, int
+                    endIndex)</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns a new string that is a substring of this string.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>string</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-8109-81da-e392c3f0eec8">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>toLowerCase()</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Converts all of the characters in this String to lower case
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>string</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-8156-bff8-d33db2f2d8ea">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>toUpperCase()</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Converts all of the characters in this String to upper case
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>string</code></td>
+                    </tr>
+                    <tr id="1c26e254-fe2b-81d0-8bc9-c3418fd5d0da">
+                        <td id="V`k`" class="" style="width:232.66666666666666px"><code>trim()</code></td>
+                        <td id="zy;r" class="" style="width:611.6666870117188px">Returns a copy of the string, with leading and trailing whitespace omitted.
+                        </td>
+                        <td id="HMKM" class="" style="width:82.66667175292969px"><code>string//</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p id="1c26e254-fe2b-81d7-b8d8-c6cc2aa56b42" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81f6-a33a-e885390abde1" class="">Use of charAt, length</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-813d-ab34-fae8520cfe67" class="code"><code class="language-SQL">  public static String getOriginal(String secret)
+    {
+        int len = secret.length();
+
+        String org = &quot;&quot;;
+
+        int i=0;
+
+        for(i=0; i&lt;len; i++)
+        {
+            org += (char)(secret.charAt(i) + i + 1);
+        }
+
+        return org;
+    }</code></pre>
+            <p id="1c26e254-fe2b-8141-90c3-de614652379a" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-81cf-9967-f528fea4b3b5" class="">Array - מערך</h1>
+            <p id="1c26e254-fe2b-8142-8198-cb9d9d190f9e" class="">→ you can use the size as a normal variable that was inputed from the user</p>
+            <p id="1c26e254-fe2b-81df-a20d-ea2d4a083ba7" class="">→ To change an arr in a function, make the function return the arr, dont just change, have to return</p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-816b-9a94-f50aab88f81e" class="code"><code class="language-Java">int intArray[];    //declaring array
+intArray = new int[20];  // allocating memory to array
+
+//or
+int[] intArray = new int[20]; // combining both statements in one
+
+ [ // array name of int type
+        int[] array = new int[4];
+  // array size
+        System.out.println(&quot;The size of &quot;
+                           + &quot;the array is &quot;
+                           + array.length); </code></pre>
+            <p id="1c26e254-fe2b-81b8-b241-cf056ab3d2ef" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81bd-a18c-ebee490118f4" class="">Array of nodes</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81e3-9e69-c6c48cccb158" class="code"><code class="language-Java">    private Node&lt;Student&gt;[] ar = new Node[6];
+</code></pre>
+            <p id="1c26e254-fe2b-814d-8d67-d7c78a65126b" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81c3-ba68-d22b5dc75585" class="">Array of objects</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81a5-9032-d1d913a37e88" class="code"><code class="language-SQL">
+class GFG {
+
+    public static void main(String args[])
+    {
+
+        // Declaring an array of student
+        Student[] arr;
+
+        // Allocating memory for 2 objects
+        // of type student
+        arr = new Student[2];
+
+        // Initializing the first element
+        // of the array
+        arr[0] = new Student(1701289270, &quot;Satyabrata&quot;);
+
+        // Initializing the second element
+        // of the array
+        arr[1] = new Student(1701289219, &quot;Omm Prasad&quot;);
+
+
+    }
+}
+ </code></pre>
+            <h1 id="1c26e254-fe2b-81b1-a4a5-f1ab5f30fb74" class="">Multi dimensional array</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8117-adfb-f1b2883e3998" class="code"><code class="language-Java">//Two dimensional array:
+int[][] twoD_arr = new int[10][20];
+
+//Three dimensional array:
+int[][][] threeD_arr = new int[10][20][30];</code></pre>
+            <p id="1c26e254-fe2b-810d-92ff-f666afb8ab7f" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-816e-a38d-e44d5d132aa5" class="">LinkedList</h1>
+            <figure id="1c26e254-fe2b-8198-8d6f-c4ae2c00d104" class="image">
+                <a href="images/Untitled%202.png"><img style="width:418px" src="images/Untitled%202.png"
+                    /></a>
+            </figure>
+            <h2 id="1c26e254-fe2b-8185-9acf-ed39e7ee6f15" class="">Create List</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81cc-885b-d813921e1f7a" class="code"><code class="language-Java">       Node&lt;Integer&gt; lst = null;
+        lst = new Node&lt;&gt;(9, lst);
+        lst = new Node&lt;&gt;(0, lst);
+        lst = new Node&lt;&gt;(-3, lst);
+        lst = new Node&lt;&gt;(5, lst);
+        lst = new Node&lt;&gt;(20, lst);
+        lst = new Node&lt;&gt;(20, lst);
+        lst = new Node&lt;&gt;(19, lst);
+        lst = new Node&lt;&gt;(18, lst);
+        lst = new Node&lt;&gt;(20, lst);
+        lst = new Node&lt;&gt;(8, lst);
+        lst = new Node&lt;&gt;(2, lst);
+        lst = new Node&lt;&gt;(7, lst); // head will be 7</code></pre>
+            <h2 id="1c26e254-fe2b-812c-b618-db042055b138" class="">Print list - pay attention that it is for INTEGER, change
+            type</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8137-a8e4-e2b91ca95dd7" class="code"><code class="language-Java"> public static void printList(Node&lt;Integer&gt; head)
+    {
+        Node&lt;Integer&gt; curr = head;
+
+        while(curr != null)
+        {
+            System.out.println(curr.getInfo());
+            curr = curr.getNext();
+        }
+    }</code></pre>
+            <p id="1c26e254-fe2b-811b-a77e-dbca34a2171b" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81bc-aaf4-c8291b1b987f" class="">LinkedListUtils</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8173-a1d6-f030628b1bb9" class="code"><code class="language-Java">import unit4.collectionsLib.Node;
+
+public class LinkedListUtils
+{
+
+
+    public static int size(Node&lt;Integer&gt; head)
+    {
+
+        int count = 0; // Initialize count
+        Node&lt;Integer&gt; current = head; // Initialize current
+        while (current != null  ) {
+            count++;
+            current = current.getNext();
+        }
+        return count;
+
+    }
+
+
+
+    public static void printList(Node&lt;Integer&gt; head)
+    {
+        Node&lt;Integer&gt; tnode = head;
+        while (tnode != null) {
+            System.out.print(tnode.getInfo() + &quot; &quot;);
+            tnode = tnode.getNext();
+        }
+    }
+
+
+    // Function to delete node at specified position in linked list
+    public static Node&lt;Integer&gt; deleteNode(int pos, Node&lt;Integer&gt; orgHead) {
+
+
+        if (orgHead == null) {
+            return null; // Empty list
+        }
+
+        Node&lt;Integer&gt; head = copyLinkedList(orgHead);
+
+        if (pos == 0) {
+            return head.getNext(); // Delete head
+        }
+
+        Node&lt;Integer&gt; prev = null;
+        Node&lt;Integer&gt; current = head;
+        int index = 0;
+
+        // Traverse the list to find the node at the specified position
+        while (current != null &amp;&amp; index &lt; pos) {
+            prev = current;
+            current = current.getNext();
+            index++;
+        }
+
+        if (current == null) {
+            // Position exceeds the size of the list
+            throw new IndexOutOfBoundsException(&quot;Position is out of bounds&quot;);
+        }
+
+        // Remove the node at the specified position by adjusting the link of the previous node
+        prev.setNext(current.getNext());
+
+        return head;
+    }
+
+    public static void deleteNodesWithValue(int value, Node&lt;Integer&gt; orgHead)
+    {
+        // If the list is empty, return null
+        if (orgHead != null) {
+
+
+            Node&lt;Integer&gt; head = copyLinkedList(orgHead);
+            // Track the previous and current nodes
+            Node&lt;Integer&gt; prev = null;
+            Node&lt;Integer&gt; current = head;
+
+            // Traverse the list
+            while (current != null) {
+                // If the current node has the value to delete
+                if (current.getInfo().equals(value))
+                {
+                    // If it&#x27;s the head node, move the head to the next node
+                    if (prev == null) {
+                        head = current.getNext();
+                    } else {
+                        // Otherwise, remove the current node by adjusting the links
+                        prev.setNext(current.getNext());
+                    }
+                } else {
+                    // Update the previous node if the current node is not deleted
+                    prev = current;
+                }
+
+                // Move to the next node
+                current = current.getNext();
+            }
+
+        }
+    }
+
+    public static Node&lt;Integer&gt; copyLinkedList(Node&lt;Integer&gt; org)
+    {
+        if (org == null) {
+            return null;
+        }
+
+        // Copy the current node
+        Node&lt;Integer&gt; newNode = new Node&lt;&gt;(org.getInfo());
+
+        // Recursively copy the remaining list and set it as the next of the new node
+        newNode.setNext(copyLinkedList(org.getNext()));
+
+        return newNode;
+    }
+
+
+    // Function to add a node at a specific index in the linked list
+    public static Node&lt;Integer&gt; addAtIndexInNewList(int index, int value, Node&lt;Integer&gt; orgHead) {
+
+        Node&lt;Integer&gt; head = copyLinkedList(orgHead);
+
+        if (index == 0) {
+            return new Node&lt;&gt;(value, head);
+        }
+
+        Node&lt;Integer&gt; prev = null;
+        Node&lt;Integer&gt; current = head;
+
+        int currentIndex = 0;
+
+        while (current != null &amp;&amp; currentIndex &lt; index) {
+            prev = current;
+            current = current.getNext();
+            currentIndex++;
+        }
+
+        if (currentIndex != index) {
+            throw new IndexOutOfBoundsException(&quot;Index is out of bounds&quot;);
+        }
+
+        // Insert the new node after the found node
+        prev.setNext(new Node&lt;&gt;(value, current));
+
+        return head;
+    }
+
+    // reminder that the index starts from 0
+    // RETURN -1 IF NOT FOUND
+    public static int findIndexOfNumberFromListStart(Node&lt;Integer&gt; lst, int num)
+    {
+        int index =0;
+        boolean found = false;
+        Node&lt;Integer&gt; curr = lst;
+
+        while(curr != null &amp;&amp; !found)
+        {
+            if(curr.getInfo() == num)
+            {
+                found = true;
+            }
+            else
+            {
+                index++;
+                curr = curr.getNext();
+            }
+        }
+
+        if(!found)
+        {
+            index = -1;
+        }
+        return index;
+
+    }
+
+    // function finds the index of the number form the back of the list
+    // list: 7-&gt;2-&gt;8-&gt;20-&gt;18-&gt;19-&gt;20-&gt;20-&gt;5-&gt;-3-&gt;0-&gt;9
+    // INDEX FROM END 8 = 10
+    public static int findIndexOfNumberFromListEnd(Node&lt;Integer&gt; lst, int num)
+    {
+        int index =0;
+        int foundIndex = -1;
+        boolean found = false;
+        Node&lt;Integer&gt; curr = lst;
+
+        while(curr != null)
+        {
+            if(curr.getInfo() == num)
+            {
+                foundIndex = index;
+                found = true;
+            }
+            index++;
+
+            curr = curr.getNext();
+
+        }
+
+        if(found==true)
+        {
+             foundIndex = index - foundIndex;
+        }
+
+        return foundIndex;
+
+    }
+
+}
+
+
+</code></pre>
+            <h1 id="1c26e254-fe2b-818c-8269-f78a2578b78e" class="">Queue</h1>
+            <p id="1c26e254-fe2b-811b-9cf6-d8a5e4a46daf" class="">Simple Queue is a linear data structure that follows the First-In-First-Out (FIFO) principle, where elements are added to the rear (back) and <strong>removed from
+                the front (head)</strong>.
+                <br/>
+                <br/>
+                <br/>
+            </p>
+            <figure id="1c26e254-fe2b-810e-84d1-e0d0ca9f97c9" class="image">
+                <a href="images/Untitled%203.png"><img style="width:709.9874877929688px" src="images/Untitled%203.png"
+                    /></a>
+            </figure>
+            <figure id="1c26e254-fe2b-81d8-affa-c681f88faffb" class="image">
+                <a href="images/Untitled%204.png"><img style="width:708px" src="images/Untitled%204.png"
+                    /></a>
+            </figure>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-812f-8a5f-f058678d3adf" class="code"><code class="language-Java">import java.util.Random;
+
+public class QueueUtil {
+
+    // helper method to copy the queue
+  public static Queue&lt;Integer&gt; copyQueue(Queue&lt;Integer&gt; original)
+ {
+        Queue&lt;Integer&gt; copy = new Queue&lt;&gt;();
+        Queue&lt;Integer&gt; tempQueue = new Queue&lt;&gt;();
+
+        // Copy the elements while keeping the original intact
+        while (!original.isEmpty())
+			  {
+            int element = original.remove();
+            copy.insert(element);
+            tempQueue.insert(element);
+        }
+
+        // Restore the original queue
+        while (!tempQueue.isEmpty())
+        {
+            original.insert(tempQueue.remove());
+        }
+
+        return copy;
+    }
+
+
+    // function builds a queue made by 10 random numbers from 10 to -10 and returns it
+    public static Queue&lt;Integer&gt; queue10_10Random ()
+    {
+        final int MAX_RAND = 10;
+        final int MIN_RAND = -10;
+
+       Random rand = new Random();
+       Queue&lt;Integer&gt; randomQueue = new Queue&lt;&gt;();
+
+       int currRand = 0;
+       for(int i=0; i&lt;10; i++)
+       {
+           currRand = rand.nextInt(MAX_RAND - MIN_RAND + 1) + MIN_RAND;
+
+           randomQueue.insert(currRand);
+       }
+
+       return randomQueue;
+    }
+
+    // returns amount of members in the queue
+    public static  int queueSize (Queue&lt;Integer&gt; originalQ )
+    {
+        Queue&lt;Integer&gt; q = copyQueue(originalQ);
+        int count=0;
+
+        while(!q.isEmpty())
+        {
+            q.remove();
+            count++;
+
+        }
+
+        return count;
+
+    }
+
+
+    // function receives a queue&lt;integer&gt; and returs  the sum of its members
+    public static  int queueSum(Queue&lt;Integer&gt; originalQ )
+    {
+        Queue&lt;Integer&gt; q = copyQueue(originalQ);
+
+        int sum=0;
+        while(!q.isEmpty())
+        {
+            sum+=q.remove();
+        }
+        return sum;
+    }
+
+    // function receies a queue of integers and returns the sum of the even digits in the queue
+    public static  int queueSumEven (Queue&lt;Integer&gt; originalQ )
+    {
+        Queue&lt;Integer&gt; q = copyQueue(originalQ);
+
+        int sum=0;
+        int curr=0;
+
+        while(!q.isEmpty())
+        {
+
+            curr = q.remove();
+
+            if (curr % 2 == 0)
+            {
+                sum+=curr;
+            }
+        }
+
+        return sum;
+    }
+
+    // function returns the sum of the first and last digits in the given queue
+    public static int queueSumFirstLast(Queue&lt;Integer&gt; originalQ )
+    {
+        Queue&lt;Integer&gt; q = copyQueue(originalQ);
+
+        int sum=0;
+        int curr=0;
+
+        sum += q.remove();
+
+        while(!q.isEmpty())
+        {
+            curr = q.remove();
+        }
+        sum+=curr;
+        return sum;
+    }
+
+    // receives a queue and returns the highest number on it
+    public static  int queueMax( Queue&lt;Integer&gt; originalQ )
+    {
+        Queue&lt;Integer&gt; q = copyQueue(originalQ);
+
+        int max=Integer.MIN_VALUE;
+        int curr=0;
+
+        while(!q.isEmpty())
+        {
+
+            curr = q.remove();
+
+            if (curr&gt;max)
+            {
+                max=curr;
+            }
+        }
+
+        return max;
+    }
+
+
+
+    // Function to delete element at specified index from Queue and return a new Queue
+    public static Queue&lt;Integer&gt; deleteAtIndex(int index, Queue&lt;Integer&gt; orgQ) {
+
+        Queue&lt;Integer&gt; copyOrg = copyQueue(orgQ);
+        Queue&lt;Integer&gt; delQ = new Queue&lt;&gt;();
+
+        int queueSize = queueSize(orgQ); // minus one as it will take out an index
+        for(int i=0; i&lt;queueSize; i++)
+        {
+            if(i == index) // if its in the index, jump it
+            {
+                copyOrg.remove();
+            }
+            else
+            {
+                delQ.insert(copyOrg.remove());
+            }
+
+        }
+
+
+        return delQ;
+    }
+
+    public static Queue&lt;Integer&gt; insertAtIndex(int index, int element, Queue&lt;Integer&gt; orgQ) {
+        Queue&lt;Integer&gt; copyOrg = copyQueue(orgQ);
+        Queue&lt;Integer&gt; insQ = new Queue&lt;&gt;();
+
+        int queueSize = queueSize(orgQ);
+
+        for (int i = 0; i &lt;= queueSize; i++) {
+            if (i == index) {
+                insQ.insert(element);
+            }
+            if (!copyOrg.isEmpty()) {
+                insQ.insert(copyOrg.remove());
+            }
+        }
+
+        return insQ;
+    }
+
+}
+</code></pre>
+            <p id="1c26e254-fe2b-81b4-86fa-ca4c1872b115" class="">
+            </p>
+            <p id="1c26e254-fe2b-81a4-99b6-e93325b2936b" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-8143-aa6e-c4ff5ddeade1" class="">Hierarchy</h1>
+            <figure id="1c26e254-fe2b-810d-ad08-c481430a0236" class="image">
+                <a href="images/Untitled%205.png"><img style="width:445px" src="images/Untitled%205.png"
+                    /></a>
+            </figure>
+            <figure id="1c26e254-fe2b-8136-b237-dd7db5335063" class="image">
+                <a href="images/Untitled%206.png"><img style="width:709.9625244140625px" src="images/Untitled%206.png"
+                    /></a>
+            </figure>
+            <p id="1c26e254-fe2b-8174-a86c-ca87b3d4d36e" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-815d-849e-c0999a67f748" class="">Every class extends from Object automatically</h1>
+            <h2 id="1c26e254-fe2b-8149-86bd-c83f6d7c908a" class="">Functions in object</h2>
+            <p id="1c26e254-fe2b-81b1-aabf-f365b7859d07" class="">
+            </p>
+            <h3 id="1c26e254-fe2b-8166-b05e-d680dc5a5681" class="">toString()</h3>
+            <p id="1c26e254-fe2b-8147-bc94-e8de0dcc49b9" class="">→ System.out.println(obj) calls obj.toString()</p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81dd-935b-d8b405a8113f" class="code"><code class="language-Java"> public String toString(){//overriding the toString() method
+  return rollno+&quot; &quot;+name+&quot; &quot;+city;
+ }  </code></pre>
+            <p id="1c26e254-fe2b-8102-8dd4-e9a13e676cb6" class="">
+            </p>
+            <h3 id="1c26e254-fe2b-814c-9d58-f1e6767687a2" class="">equals(Object)</h3>
+            <div>
+                <p id="757f9015-3b2c-4b3b-b454-8ace0499b0f7" class="">→ function that comes from obejct, can override from Object
+                </p>
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81ee-a5dd-df1481d60fb3" class="code"><code class="language-SQL">@Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+
+    }
+
+public boolean equals(Point obj)
+{
+			return obj.x == this.x &amp;&amp; obj.y == this.y;
+}</code></pre>
+            <p id="1c26e254-fe2b-81f4-9ca3-dd223b9bbf6b" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81d1-bae4-cf9bb051806a" class="">super.&lt;method&gt;()</h2>
+            <p id="1c26e254-fe2b-81b1-9882-df69372fd4bc" class="">super.method() calls a parent method</p>
+            <p id="1c26e254-fe2b-81b1-94a9-fc258535d5ed" class="">
+            </p>
+            <p id="1c26e254-fe2b-8189-a9c0-dfb66ebeb06f" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-8177-bbf7-fcd170ab40d6" class="">דריסה - override</h1>
+            <p id="1c26e254-fe2b-8110-94a7-ee57982abf06" class="">הגדרת מחדש של פעולות </p>
+            <p id="1c26e254-fe2b-81d5-9720-d91405338615" class="">overriding parent functions</p>
+            <h2 id="1c26e254-fe2b-81fe-a6d1-c87d377cbc04" class="">Greeting Card - Parent Class</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-8100-9525-d363a2c45fd8" class="code"><code class="language-Java">public class GreetingCard
+{
+    protected String recipient;
+
+    protected String sender;
+
+    public GreetingCard(String recipient, String sender)
+    {
+        this.recipient = recipient;
+        this.sender = sender;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    protected String greetingMsg()
+    {
+        return &quot;Best Greetings!&quot;;
+    }
+
+    public String toString()
+    {
+        String st = &quot;&quot;;
+        st = &quot;Dear &quot; + recipient + &quot;,\n&quot; + greetingMsg() + &quot;\n&quot; + sender + &quot;\n**********************&quot;;
+        return st;
+    }
+}
+</code></pre>
+            <p id="1c26e254-fe2b-81f4-ada0-d3a1fd7baf1f" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81c4-9e64-c56a4b8b13be" class="">WeedingCard - Child</h2>
+            <p id="1c26e254-fe2b-8137-8898-d22eaba03c8b" class="">→ for the child use extends</p>
+            <p id="1c26e254-fe2b-8159-9f0c-fdbc6488d824" class="">→ use super() in the constructor</p>
+            <p id="1c26e254-fe2b-819b-9fd8-e38cc9ec3fe3" class="">
+            </p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81b8-a4b1-e3034e225ad4" class="code"><code class="language-Java">public class WeddingCard extends GreetingCard
+{
+    WeddingCard(String bride, String groom, String sender)
+    {
+        super(bride +&quot; &amp; &quot;+groom, sender); // calls the Greeting Card constructor - set groom &amp; bride as the recipients
+
+    }
+
+    void setRecipient(String bride, String groom)
+    {
+        this.recipient = bride+&quot; &amp; &quot;+groom;
+    }
+
+    protected String greetingMsg()
+    {
+        return &quot;May you live happily ever after&quot;;
+    }
+}
+</code></pre>
+            <p id="1c26e254-fe2b-8120-9b42-f88dd20e3b0e" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81a4-8ace-e910f685e1f2" class="">BirthdayCard - child from Greeting Card</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81b2-9bf8-f48db09b08d8" class="code"><code class="language-Java">public class BirthdayCard extends GreetingCard
+{
+
+    private int age;
+
+    BirthdayCard(String recipient, String sender, int age)
+    {
+        super(recipient, sender);
+        this.age = age;
+    }
+
+    protected String greetingMsg()
+    {
+        return &quot;Happy &quot;+ age + &quot;th Birthday!&quot;;
+    }
+}
+</code></pre>
+            <p id="1c26e254-fe2b-8115-9164-e80329f4d55c" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-81ff-b202-ec0c6575daf9" class="">YouthBirthday - child of BirthdayCard</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81a1-8f28-e4bc29121ec0" class="code"><code class="language-Java">public class YouthBirthday extends BirthdayCard
+{
+    YouthBirthday(String recipient, String sender, int age)
+    {
+        super(recipient, sender, age);
+    }
+
+    protected String greetingMsg()
+    {
+        String msg = super.greetingMsg(); // call parent method
+        msg+= &quot;\nHow have you grown!&quot;;
+        return msg;
+    }
+
+
+}
+</code></pre>
+            <p id="1c26e254-fe2b-8114-ba00-e52ba39bc9ac" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-81af-abec-ee4bf825d3b9" class="">Super in the constructor</h1>
+            <p id="1c26e254-fe2b-81f1-9101-cee2da837468" class="">If the parent class has an empty constructor doesnt need to do super() for the parent constructor, but if it doesnt, has to do super() and send the paramenters</p>
+            <p id="1c26e254-fe2b-81b1-a0fd-c398d128ba3e" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-8174-b0fb-f4a776105e8e" class="">Static variables in classes</h1>
+            <p id="1c26e254-fe2b-8174-9d27-f0cc226843d1" class="">→ OBS DEFINE THE VARIABLE IN THE START</p>
+            <p id="1c26e254-fe2b-8145-8019-d6ed39ffb353" class="">→ the variable is from the class, and not from each specific object</p>
+            <p id="1c26e254-fe2b-8178-825f-d8f5dcd4592a" class="">→ exists only one variable, even for children of the class
+            </p>
+            <p id="1c26e254-fe2b-81a2-bc04-d937fa6af574" class="">→ use class.var to use the variable and not from a specific obj</p>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-811f-a4ba-c3442e16163e" class="code"><code class="language-Java">public class Department
+{
+    public static int numberOfWorker= 0;
+    public static final int CONSTANT_INT = 1; // example of how to add static contant
+    public String name;
+
+    public Department(String name) {
+        this.name = name;
+        numberOfWorker++; // increment the static variable every time a new 							//Person is created
+    }
+}
+
+
+Department dpt1 = new Department(&quot;Admin&quot;);
+System.out.println(Department.numberOfWorker); // output: 1
+
+Department dpt2 = new Department (&quot;Finance&quot;);
+System.out.println(Department.numberOfWorker); // output: 2
+
+Department dpt3 = new Department (&quot;Software&quot;);
+System.out.println(Department.numberOfWorker); // output: 3</code></pre>
+            <p id="1c26e254-fe2b-813d-8a66-d3027c4cc817" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-81b4-a832-c5f9c65007d4" class="">Constants in classes</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81ed-933c-eadd12f4d5d7" class="code"><code class="language-SQL">public static final int PI = 3.14;</code></pre>
+            <p id="1c26e254-fe2b-819c-b877-c4ce6aa4b632" class="">
+            </p>
+            <h2 id="1c26e254-fe2b-818b-b934-c2d13ef19551" class="">Use the constant</h2>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-813b-8dc5-c97f41df5a21" class="code"><code class="language-SQL">public class Main
+{
+    public static void main(String[] args)
+    {
+        System.out.println(Mathematics.PI);
+    }
+}</code></pre>
+            <p id="1c26e254-fe2b-81f5-91bd-ed590431d991" class="">
+            </p>
+            <h1 id="1c26e254-fe2b-810f-a059-c27b4b339ed9" class="">Static methods/functions</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"
+            />
+            <pre id="1c26e254-fe2b-81b1-a81c-fbaa5152f330" class="code"><code class="language-SQL">  public static double power(int x, int y)
+    {
+        double pow = 1;
+
+        for(int i=0; i&lt;y; i++)
+        {
+
+            pow*=x;
+        }
+
+        return pow;
+    }
+</code></pre>
+            <h1 id="1c26e254-fe2b-81e2-aca1-c69b5087edb4" class="">OBS</h1>
+            <p id="1c26e254-fe2b-817a-8c64-e11da2050ca0" class="">→ in here, the Second(fx, fy) sets count to plus one</p>
+            <p id="1c26e254-fe2b-8115-b8aa-e63a0bac1cd4" class="">→ this.f = fy does not upper the count as it is like making it a reference</p>
+            <figure id="1c26e254-fe2b-81a9-9690-cfa8c605a7ee" class="image">
+                <a href="images/Untitled%207.png"><img style="width:708px" src="images/Untitled%207.png"
+                    /></a>
+            </figure>
+            <h1 id="1c26e254-fe2b-81b3-968c-fcbc21a2a970" class="">לצייר עצמים</h1>
+            <figure id="1c26e254-fe2b-8168-9b5d-d0fb0705b1aa" class="image">
+                <a href="images/Untitled%208.png"><img style="width:709.9874877929688px" src="images/Untitled%208.png"
+                    /></a>
+            </figure>
+            <figure id="1c26e254-fe2b-819b-abf4-e20d0b071d38" class="image">
+                <a href="images/Untitled%209.png"><img style="width:709.9750366210938px" src="images/Untitled%209.png"
+                    /></a>
+            </figure>
+            <figure id="1c26e254-fe2b-81e9-b6a3-dfd827679a68" class="image">
+                <a href="images/Untitled%2010.png"><img style="width:564px" src="images/Untitled%2010.png"
+                    /></a>
+            </figure>
+            <p id="1c26e254-fe2b-8190-92af-c7b368323d13" class="">
+            </p>
+        </div>
+    </article>
+    <span class="sans" style="font-size:14px;padding-top:2em"></span>
+    <!-- Ad container with improved styling -->
+    <div class="ad-container2" style="margin: 20px 0; clear: both; display: block;">
+        <script type="text/javascript">
+            atOptions = {
+            		'key' : 'cb2c2779e0995d04471242f41dca28c2',
+            		'format' : 'iframe',
+            		'height' : 90,
+            		'width' : 728,
+            		'params' : {}
+            	};
+        </script>
+
+</body>
+
+</html>
